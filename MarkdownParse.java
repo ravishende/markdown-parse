@@ -12,8 +12,13 @@ public class MarkdownParse {
         // find the next [, then find the ], then find the (, then read link upto next )
         int currentIndex = 0;
         while(currentIndex < markdown.length()) {
-            //handle images
+            
             int openBracket = markdown.indexOf("[", currentIndex);
+            //handle starting file with link
+            if(markdown.charAt(0) == ('[') && currentIndex == 0){
+                openBracket = 0;
+            }
+            //handle images
             //if next open bracket is part of an image,
             if(markdown.indexOf("![", currentIndex) == openBracket -1){
                 //skip to next ')' character
