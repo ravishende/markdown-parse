@@ -12,13 +12,20 @@ public class MarkdownParse {
         // find the next [, then find the ], then find the (, then read link upto next )
         int currentIndex = 0;
         while(currentIndex < markdown.length()) {
+            //handle images
             int openBracket = markdown.indexOf("[", currentIndex);
+            //if next open bracket is part of an image,
+            if(markdown.indexOf("![", currentIndex) == openBracket -1){
+                //skip to next ')' character
+                currentIndex = markdown.indexOf(")", currentIndex);
+                continue;
+            }
             int closeBracket = markdown.indexOf("]", openBracket);
             int openParen = markdown.indexOf("(", closeBracket);
             int closeParen = markdown.indexOf(")", openParen);
             toReturn.add(markdown.substring(openParen + 1, closeParen));
             currentIndex = closeParen + 1;
-            //handle errors with empty lines at the end
+            //handle errors of forever loop with empty lines at the end
             if(markdown.indexOf("[", currentIndex) == -1){
                 break;
             }
