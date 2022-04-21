@@ -12,15 +12,17 @@ public class MarkdownParse {
         // find the next [, then find the ], then find the (, then read link upto next )
         int currentIndex = 0;
         while(currentIndex < markdown.length()) {
-            
-            int openBracket = markdown.indexOf("[", currentIndex);
+            int openBracket;
             //handle starting file with link
             if(markdown.charAt(0) == ('[') && currentIndex == 0){
                 openBracket = 0;
+            } else {
+                openBracket = markdown.indexOf("[", currentIndex);
+
             }
             //handle images
             //if next open bracket is part of an image,
-            if(markdown.indexOf("![", currentIndex) == openBracket -1){
+            if(openBracket>0 && markdown.charAt(openBracket-1) == '!'){
                 //skip to next ')' character
                 currentIndex = markdown.indexOf(")", currentIndex);
                 continue;
@@ -34,6 +36,7 @@ public class MarkdownParse {
             if(markdown.indexOf("[", currentIndex) == -1){
                 break;
             }
+
         }
 
         return toReturn;
@@ -44,6 +47,6 @@ public class MarkdownParse {
         Path fileName = Path.of(args[0]);
         String content = Files.readString(fileName);
         ArrayList<String> links = getLinks(content);
-	    System.out.println(links);
+	    System.out.println("\n" + links + "\n");
     }
 }
