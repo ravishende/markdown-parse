@@ -34,6 +34,7 @@ public class MarkdownParse {
             currentIndex = closeParen + 1;
             //handle errors of forever loop with empty lines at the end
             if(markdown.indexOf("[", currentIndex) == -1){
+                //no more links
                 break;
             }
 

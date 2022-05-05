@@ -52,5 +52,13 @@ public class MarkdownParseTest { //defines the MarkdownParseTest class
         ArrayList<String> links = MarkdownParse.getLinks(content);
         assertEquals(List.of("https://google.com", "https://apple.com", "https://www.microsoft.com/en-us/"), links);
     }
+
+    @Test
+    public void regularCase() throws IOException{
+        Path fileName = Path.of("test-file2.md");
+        String content = Files.readString(fileName);
+        ArrayList<String> links = MarkdownParse.getLinks(content);
+        assertEquals(List.of("https://something.com", "some-page.html"), links);
+    }
 }
 
