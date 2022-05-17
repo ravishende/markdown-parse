@@ -13,7 +13,7 @@ public class MarkdownParse {
         int currentIndex = 0;
         while(currentIndex < markdown.length()) {
             int openBracket;
-            //handle starting file with link
+            //handle file's starting with link
             if(markdown.charAt(0) == ('[') && currentIndex == 0){
                 openBracket = 0;
             } else {
