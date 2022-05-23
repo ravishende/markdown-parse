@@ -15,13 +15,16 @@ public class MarkdownParse {
         int openParenCount = 1;
         int lastCloseParenIndex = markdown.indexOf(")", openParen);
         while (openParenCount > 0) {
+            if(closeParen >= markdown.length()){
+                return -1;
+            }
             if (markdown.charAt(closeParen) == '(') {
                 openParenCount++;
             } else if (markdown.charAt(closeParen) == ')') {
                 openParenCount--;
                 lastCloseParenIndex = closeParen;
             }
-            closeParen++;
+            // closeParen++;
         }
         return lastCloseParenIndex;
     }
@@ -66,6 +69,9 @@ public class MarkdownParse {
             // The close paren we need may not be the next one in the file
             // Track opening parens and find matching close paren
             int closeParen = findCloseParen(markdown, openParen);
+            // if(closeParen == -1){
+
+            // }
             
             if(nextOpenBracket == -1 || nextCloseBracket == -1
                   || closeParen == -1 || openParen == -1) {
