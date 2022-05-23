@@ -5,8 +5,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.junit.*; //imports JUnit
+
 public class MarkdownParseTest { //defines the MarkdownParseTest class
     @Test //marks code as a test for compiler to run
     public void addition() { //creates function for test
@@ -60,5 +60,30 @@ public class MarkdownParseTest { //defines the MarkdownParseTest class
         ArrayList<String> links = MarkdownParse.getLinks(content);
         assertEquals(List.of("https://something.com", "some-page.html"), links);
     }
+    /*
+    @Test
+    public void backTicks() throws IOException{
+        Path fileName = Path.of("new-test.md");
+        String content = Files.readString(fileName);
+        ArrayList<String> links = MarkdownParse.getLinks(content);
+        assertEquals(List.of("google.com", "ucsd.edu"), links);
+    }
+
+    @Test
+    public void nestedLinks() throws IOException{
+        Path fileName = Path.of("new-test2.md");
+        String content = Files.readString(fileName);
+        ArrayList<String> links = MarkdownParse.getLinks(content);
+        assertEquals(List.of("a.com", "a.com(())", "example.com"), links);
+    }
+
+    @Test
+    public void overOneLine() throws IOException{
+        Path fileName = Path.of("new-test3.md");
+        String content = Files.readString(fileName);
+        ArrayList<String> links = MarkdownParse.getLinks(content);
+        assertEquals(List.of("https://sites.google.com/eng.ucsd.edu/cse-15l-spring-2022/schedule"), links);
+    }
+    */
 }
 
