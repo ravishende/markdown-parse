@@ -60,7 +60,7 @@ public class MarkdownParseTest { //defines the MarkdownParseTest class
         ArrayList<String> links = MarkdownParse.getLinks(content);
         assertEquals(List.of("https://something.com", "some-page.html"), links);
     }
-    /*
+    // /*
     @Test
     public void backTicks() throws IOException{
         Path fileName = Path.of("new-test.md");
@@ -84,6 +84,6 @@ public class MarkdownParseTest { //defines the MarkdownParseTest class
         ArrayList<String> links = MarkdownParse.getLinks(content);
         assertEquals(List.of("https://sites.google.com/eng.ucsd.edu/cse-15l-spring-2022/schedule"), links);
     }
-    */
+    // */
 }
 
