@@ -44,18 +44,7 @@ public class MarkdownParse {
         return toReturn;
     }
 
-    //mine: test-files/12.md
-        //[\!\"\#\$\%\&\'\(\]
 
-    //theirs: test-files/12.md
-        //[]
-
-
-    //mine: test-files/22.md
-        //[[/bar\*"ti\*tle"]]
-
-    //theirs: test-files/22.md
-        //[]
     private static boolean foreverLoop(String markdown, int currentIndex){
         if(markdown.indexOf("[", currentIndex) == -1
             || markdown.indexOf("]", currentIndex) == -1
