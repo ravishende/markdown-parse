@@ -2,6 +2,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+
 public class MarkdownParse {
 
     public static ArrayList<String> getLinks(String markdown) {
@@ -21,24 +22,50 @@ public class MarkdownParse {
             //if next open bracket is part of an image,
             if(openBracket>0 && markdown.charAt(openBracket-1) == '!'){
                 //skip to next ')' character
+                if(foreverLoop(markdown, currentIndex)){
+                    break;
+                }
                 currentIndex = markdown.indexOf(")", currentIndex);
                 continue;
             }
             int closeBracket = markdown.indexOf("]", openBracket);
             int openParen = markdown.indexOf("(", closeBracket);
             int closeParen = markdown.indexOf(")", openParen);
-            toReturn.add(markdown.substring(openParen + 1, closeParen));
-            currentIndex = closeParen + 1;
             //handle errors of forever loop with empty lines at the end
-            if(markdown.indexOf("[", currentIndex) == -1){
+            if(foreverLoop(markdown, currentIndex)){
                 break;
             }
+            toReturn.add(markdown.substring(openParen + 1, closeParen));
+            currentIndex = closeParen + 1;
+            
 
         }
 
         return toReturn;
     }
 
+    //mine: test-files/12.md
+        //[\!\"\#\$\%\&\'\(\]
+
+    //theirs: test-files/12.md
+        //[]
+
+
+    //mine: test-files/22.md
+        //[[/bar\*"ti\*tle"]]
+
+    //theirs: test-files/22.md
+        //[]
+    private static boolean foreverLoop(String markdown, int currentIndex){
+        if(markdown.indexOf("[", currentIndex) == -1
+            || markdown.indexOf("]", currentIndex) == -1
+            || markdown.indexOf("(", currentIndex) == -1
+            || markdown.indexOf(")", currentIndex) == -1
+        ){
+            return true;
+        } 
+        return false;
+    }
 
     public static void main(String[] args) throws IOException {
         Path fileName = Path.of(args[0]);
